@@ -12,7 +12,7 @@ const serviceAdapter = new OpenAIAdapter({ openai } as any);
 
 const runtime = new CopilotRuntime({
   agents: {
-    'my_agent': new LangGraphAgent({
+    'default': new LangGraphAgent({
       deploymentUrl: process.env.LANGGRAPH_DEPLOYMENT_URL || "http://localhost:2024",
       graphId: 'agent',
     })
