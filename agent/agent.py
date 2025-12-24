@@ -2,8 +2,9 @@ from langchain.chat_models import init_chat_model
 from langchain.agents import create_agent
 from langchain.tools import tool
 from dotenv import load_dotenv
+import os
 
-load_dotenv()
+load_dotenv('../.env')
 
 @tool
 def get_weather(city: str) -> str:
@@ -12,7 +13,7 @@ def get_weather(city: str) -> str:
     return f"The current weather in {city} is sunny with a temperature of 25°C."
 
 agent = create_agent(
-    model=init_chat_model("openai:kimi-k2"),
+    model=init_chat_model("openai:"+os.getenv("MODEL_NAME",'kimi-k2')),
     tools=[get_weather],
     system_prompt="You are a helpful weather assistant."
 )

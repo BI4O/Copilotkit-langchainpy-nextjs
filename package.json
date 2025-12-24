@@ -3,9 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently --names \"UI,Agent\" --prefix-colors \"blue,cyan\" \"pnpm run dev:next\" \"pnpm run dev:langgraph\"",
+    "dev:next": "next dev",
+    "dev:langgraph": "cd agent && npx @langchain/langgraph-cli dev --port 2024 --no-browser",
+    "start": "concurrently --names \"UI,Agent\" --prefix-colors \"green,cyan\" \"pnpm run start:ui\" \"pnpm run start:agent\"",
+    "start:ui": "pnpm run build && pnpm run start:prod",
+    "start:agent": "cd agent && npx @langchain/langgraph-cli dev --port 2024 --no-browser",
+    "start:prod": "next start",
     "build": "next build",
-    "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
@@ -13,19 +18,21 @@
     "@copilotkit/react-ui": "^1.50.1",
     "@copilotkit/runtime": "^1.50.1",
     "next": "16.1.1",
-    "openai": "^4.85.1",
+    "openai": "^4.104.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "zod": "^3.23.8"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^20.19.27",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.2",
     "eslint-config-next": "16.1.1",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
   }
 }
