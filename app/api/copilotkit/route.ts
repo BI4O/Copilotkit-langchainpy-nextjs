@@ -4,11 +4,9 @@ import {
   copilotRuntimeNextJSAppRouterEndpoint
 } from "@copilotkit/runtime";
 import { LangGraphAgent } from "@copilotkit/runtime/langgraph";
-import OpenAI from "openai";
 import { NextRequest } from "next/server";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const serviceAdapter = new OpenAIAdapter({ openai } as any);
+const serviceAdapter = new OpenAIAdapter();
 
 const runtime = new CopilotRuntime({
   agents: {
