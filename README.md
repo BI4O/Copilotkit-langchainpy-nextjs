@@ -142,15 +142,25 @@ export default function RootLayout({
 `app/page.tsx`:
 
 ```tsx
-import { CopilotSidebar } from "@copilotkit/react-ui";
+"use client";
+
+import { CopilotChat } from "@copilotkit/react-ui";
 
 export default function Home() {
   return (
-    <main>
-      <h1>My AI App</h1>
-      <p>Powered by CopilotKit + LangGraph</p>
-      <CopilotSidebar />
-    </main>
+    <div className="h-screen flex flex-col">
+      <header className="bg-white shadow-lg border-b-2 border-gray-200 px-10 py-4">
+        <h1 className="text-lg font-semibold text-gray-800">AI Chat Assistant</h1>
+      </header>
+      <div className="flex-1 relative">
+        <CopilotChat
+          className="absolute inset-0 flex flex-col px-80"
+          labels={{
+            placeholder: "输入你的问题...",
+          }}
+        />
+      </div>
+    </div>
   );
 }
 ```
